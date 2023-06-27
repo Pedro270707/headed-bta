@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "headed",
+  "version": "${version}",
+
+  "name": "Headed",
+  "description": "A mod that adds modern Minecraft mob heads.",
+  "authors": [
+    "Pedro Ricardo"
+  ],
+  "contact": {
+    "homepage": "https://pedroricardo.net",
+    "sources": "https://github.com/Pedro270707/headed-bta"
+  },
+
+  "license": "GPL-3.0",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.pedroricardo.headed.Headed"
+    ]
+  },
+  "mixins": [
+    "headed.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.13.3"
+  },
+  "suggests": {
+  }
+}

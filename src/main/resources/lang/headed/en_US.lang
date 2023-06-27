@@ -1,0 +1,12 @@
+tile.headed.testBlock.name=Test Block
+tile.headed.testBlock.desc=A test block!
+tile.headed.skull.name=Skull
+tile.headed.skull.wall.name=Wall Skull
+item.headed.skull.name=Skull
+item.headed.skull.desc=A mob's skull.
+item.headed.skull.zombie.name=Zombie Head
+item.headed.skull.zombie.desc=A zombie's head.
+item.headed.skull.skeleton.name=Skeleton Skull
+item.headed.skull.skeleton.desc=A skeleton's skull.
+item.headed.skull.creeper.name=Creeper Head
+item.headed.skull.creeper.desc=A creeper's head.
