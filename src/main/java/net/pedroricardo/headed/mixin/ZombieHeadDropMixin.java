@@ -4,7 +4,7 @@ import net.minecraft.src.*;
 import net.pedroricardo.headed.Headed;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(EntityZombie.class)
+@Mixin(value = EntityZombie.class, remap = false)
 public abstract class ZombieHeadDropMixin extends EntityLiving {
 
     public ZombieHeadDropMixin(World world) {

@@ -9,16 +9,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(SlotArmor.class)
+@Mixin(value = SlotArmor.class, remap = false)
 public class PutSkullOnHeadMixin {
 
-    @Mixin(SlotArmor.class)
+    @Mixin(value = SlotArmor.class, remap = false)
     private interface ArmorTypeAccessor {
-        @Accessor(value = "armorType", remap = false)
+        @Accessor("armorType")
         int armorType();
     }
 
-    @Inject(method = "canPutStackInSlot", at = @At("HEAD"), cancellable = true, remap = false)
+    @Inject(method = "canPutStackInSlot", at = @At("HEAD"), cancellable = true)
     public void canPutStackInSlot(ItemStack itemstack, CallbackInfoReturnable<Boolean> cir) {
         if (itemstack.getItem() instanceof HeadedSkullItem) {
             cir.setReturnValue(((ArmorTypeAccessor)((SlotArmor)(Object)this)).armorType() == 0);

@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.BlockHelper;
 import turniplabs.halplibe.helper.EntityHelper;
 import turniplabs.halplibe.helper.ItemHelper;
-import turniplabs.halplibe.mixin.accessors.BlockAccessor;
+import turniplabs.halplibe.mixin.accessors.CraftingManagerAccessor;
 
 import java.util.Random;
 
@@ -27,14 +27,17 @@ public class Headed implements ModInitializer {
         public static final int ZOMBIE_HEAD = WALL_SKULL.blockID + 1;
         public static final int SKELETON_SKULL = WALL_SKULL.blockID + 2;
         public static final int CREEPER_HEAD = WALL_SKULL.blockID + 3;
+        public static final int PLAYER_HEAD = WALL_SKULL.blockID + 4;
     }
 
     @Override
     public void onInitialize() {
         EntityHelper.createSpecialTileEntity(HeadedSkullBlockEntity.class, new HeadedSkullBlockRenderer(), "Skull");
-        Item.itemsList[IDs.ZOMBIE_HEAD] = ItemHelper.createItem(Headed.MOD_ID, new HeadedSkullItem(IDs.ZOMBIE_HEAD, "zombie"), "skull.zombie", "zombie_head.png");
-        Item.itemsList[IDs.SKELETON_SKULL] = ItemHelper.createItem(Headed.MOD_ID, new HeadedSkullItem(IDs.SKELETON_SKULL, "skeleton"), "skull.skeleton", "skeleton_skull.png");
-        Item.itemsList[IDs.CREEPER_HEAD] = ItemHelper.createItem(Headed.MOD_ID, new HeadedSkullItem(IDs.CREEPER_HEAD, "creeper"), "skull.creeper", "creeper_head.png");
+        Item.itemsList[IDs.ZOMBIE_HEAD] = ItemHelper.createItem(Headed.MOD_ID, new HeadedSkullItem(IDs.ZOMBIE_HEAD, "zombie", false), "skull.zombie", "zombie_head.png");
+        Item.itemsList[IDs.SKELETON_SKULL] = ItemHelper.createItem(Headed.MOD_ID, new HeadedSkullItem(IDs.SKELETON_SKULL, "skeleton", false), "skull.skeleton", "skeleton_skull.png");
+        Item.itemsList[IDs.CREEPER_HEAD] = ItemHelper.createItem(Headed.MOD_ID, new HeadedSkullItem(IDs.CREEPER_HEAD, "creeper", false), "skull.creeper", "creeper_head.png");
+        Item.itemsList[IDs.PLAYER_HEAD] = ItemHelper.createItem(Headed.MOD_ID, new HeadedSkullItem(IDs.PLAYER_HEAD, "player", true), "skull.player", "player_head.png").setMaxStackSize(1);
+
         int randomInt = new Random().nextInt(4);
         switch (randomInt) {
             case 0:

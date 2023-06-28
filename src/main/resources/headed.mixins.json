@@ -6,6 +6,7 @@
   "mixins": [
     "CreeperHeadDropMixin",
     "LoadTextureInvoker",
+    "NamePlayerHeadMixin",
     "PutSkullOnHeadMixin",
     "PutSkullOnHeadMixin$ArmorTypeAccessor",
     "RenderSkullOnHeadMixin",

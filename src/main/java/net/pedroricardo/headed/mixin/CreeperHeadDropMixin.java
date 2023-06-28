@@ -9,9 +9,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(EntityCreeper.class)
+@Mixin(value = EntityCreeper.class, remap = false)
 public abstract class CreeperHeadDropMixin {
-    @Inject(method = "onDeath", at = @At("TAIL"), remap = false)
+    @Inject(method = "onDeath", at = @At("TAIL"))
     public void onDeath(Entity entity, CallbackInfo ci) {
         if (entity instanceof EntityCreeper) {
             if (((EntityCreeper)entity).getPowered()) {

@@ -10,3 +10,5 @@ item.headed.skull.skeleton.name=Skeleton Skull
 item.headed.skull.skeleton.desc=A skeleton's skull.
 item.headed.skull.creeper.name=Creeper Head
 item.headed.skull.creeper.desc=A creeper's head.
+item.headed.skull.player.name=Player Head
+item.headed.skull.player.desc=A player's head. Can be changed with a label!

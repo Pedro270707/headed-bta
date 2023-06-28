@@ -5,7 +5,7 @@ import net.pedroricardo.headed.Headed;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(EntitySkeleton.class)
+@Mixin(value = EntitySkeleton.class, remap = false)
 public abstract class SkeletonSkullDropMixin extends EntityLiving {
 
     public SkeletonSkullDropMixin(World world) {

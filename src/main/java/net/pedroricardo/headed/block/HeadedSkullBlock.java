@@ -11,10 +11,10 @@ import net.pedroricardo.headed.Headed;
 import java.util.Random;
 
 public class HeadedSkullBlock extends BlockContainer {
-    private Class skullEntityClass;
-    private boolean isOnFloor;
+    private final Class<? extends TileEntity> skullEntityClass;
+    private final boolean isOnFloor;
 
-    public HeadedSkullBlock(int id, Class skullEntityClass, boolean isOnFloor) {
+    public HeadedSkullBlock(int id, Class<? extends TileEntity> skullEntityClass, boolean isOnFloor) {
         super(id, Material.sand);
         this.isOnFloor = isOnFloor;
         this.skullEntityClass = skullEntityClass;
@@ -82,16 +82,29 @@ public class HeadedSkullBlock extends BlockContainer {
     }
 
     public void onBlockRemoval(World world, int x, int y, int z) {
-        super.onBlockRemoval(world, x, y, z);
         HeadedSkullBlockEntity blockEntity = (HeadedSkullBlockEntity)world.getBlockTileEntity(x, y, z);
         String skullType = blockEntity.getSkullType();
-        int headID = Headed.IDs.ZOMBIE_HEAD;
-        if (skullType.equals("skeleton")) {
-            headID = Headed.IDs.SKELETON_SKULL;
-        } else if (skullType.equals("creeper")) {
-            headID = Headed.IDs.CREEPER_HEAD;
+        ItemStack itemStack;
+        switch (skullType) {
+            case "skeleton":
+                itemStack = new ItemStack(Item.itemsList[Headed.IDs.SKELETON_SKULL]);
+                break;
+            case "creeper":
+                itemStack = new ItemStack(Item.itemsList[Headed.IDs.CREEPER_HEAD]);
+                break;
+            case "player":
+                itemStack = new ItemStack(Item.itemsList[Headed.IDs.PLAYER_HEAD]);
+                if (blockEntity.getSkullOwner() != null && !blockEntity.getSkullOwner().isEmpty()) {
+                    itemStack.tag.setBoolean("overrideName", true);
+                    itemStack.tag.setString("name", blockEntity.getSkullOwner());
+                }
+                break;
+            default:
+                itemStack = new ItemStack(Item.itemsList[Headed.IDs.ZOMBIE_HEAD]);
+                break;
         }
-        world.dropItem(x, y, z, new ItemStack(Item.itemsList[headID]));
+        world.dropItem(x, y, z, itemStack);
+        super.onBlockRemoval(world, x, y, z);
     }
 
     public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
