@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.BlockHelper;
 import turniplabs.halplibe.helper.EntityHelper;
 import turniplabs.halplibe.helper.ItemHelper;
-import turniplabs.halplibe.mixin.accessors.CraftingManagerAccessor;
 
 import java.util.Random;
 
