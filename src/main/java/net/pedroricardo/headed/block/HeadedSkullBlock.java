@@ -6,6 +6,7 @@
 package net.pedroricardo.headed.block;
 
 import net.minecraft.src.*;
+import net.pedroricardo.headed.Headed;
 
 import java.util.Random;
 
@@ -14,7 +15,7 @@ public class HeadedSkullBlock extends BlockContainer {
     private boolean isOnFloor;
 
     public HeadedSkullBlock(int id, Class skullEntityClass, boolean isOnFloor) {
-        super(id, Material.rock);
+        super(id, Material.sand);
         this.isOnFloor = isOnFloor;
         this.skullEntityClass = skullEntityClass;
         this.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.5F, 0.75F);
@@ -76,14 +77,20 @@ public class HeadedSkullBlock extends BlockContainer {
         }
     }
 
-    public int idDropped(int i, Random random) {
-        int type = 1;
-        if (((HeadedSkullBlockEntity)this.getBlockEntity()).getSkullType().equals("skeleton")) {
-            type = 2;
-        } else if (((HeadedSkullBlockEntity)this.getBlockEntity()).getSkullType().equals("creeper")) {
-            type = 3;
+    public int quantityDropped(int metadata, Random random) {
+        return 0;
+    }
+
+    public void onBlockRemoval(World world, int x, int y, int z) {
+        HeadedSkullBlockEntity blockEntity = (HeadedSkullBlockEntity)world.getBlockTileEntity(x, y, z);
+        String skullType = blockEntity.getSkullType();
+        int headID = Headed.IDs.ZOMBIE_HEAD;
+        if (skullType.equals("skeleton")) {
+            headID = Headed.IDs.SKELETON_SKULL;
+        } else if (skullType.equals("creeper")) {
+            headID = Headed.IDs.CREEPER_HEAD;
         }
-        return 17287 + type;
+        world.dropItem(x, y, z, new ItemStack(Item.itemsList[headID]));
     }
 
     public void onNeighborBlockChange(World world, int i, int j, int k, int l) {

@@ -1,13 +1,22 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "net.pedroricardo.headed.mixin",
-    "compatibilityLevel": "JAVA_8",
-    "mixins": [
-    ],
-    "client": [
-    ],
-    "injectors": {
-        "defaultRequire": 1
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.pedroricardo.headed.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "CreeperHeadDropMixin",
+    "LoadTextureInvoker",
+    "PutSkullOnHeadMixin",
+    "PutSkullOnHeadMixin$ArmorTypeAccessor",
+    "RenderSkullOnHeadMixin",
+    "RenderSkullOnHeadMixin$ModelAccessor",
+    "RenderSkullOnHeadMixin$RenderManagerAccessor",
+    "SkeletonSkullDropMixin",
+    "ZombieHeadDropMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
   }
 }
