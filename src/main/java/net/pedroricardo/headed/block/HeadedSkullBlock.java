@@ -82,6 +82,7 @@ public class HeadedSkullBlock extends BlockContainer {
     }
 
     public void onBlockRemoval(World world, int x, int y, int z) {
+        super.onBlockRemoval(world, x, y, z);
         HeadedSkullBlockEntity blockEntity = (HeadedSkullBlockEntity)world.getBlockTileEntity(x, y, z);
         String skullType = blockEntity.getSkullType();
         int headID = Headed.IDs.ZOMBIE_HEAD;
