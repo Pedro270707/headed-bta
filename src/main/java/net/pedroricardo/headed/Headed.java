@@ -13,6 +13,8 @@ import turniplabs.halplibe.helper.EntityHelper;
 import turniplabs.halplibe.helper.ItemHelper;
 import turniplabs.halplibe.mixin.accessors.BlockAccessor;
 
+import java.util.Random;
+
 
 public class Headed implements ModInitializer {
     public static final String MOD_ID = "headed";
@@ -33,6 +35,20 @@ public class Headed implements ModInitializer {
         Item.itemsList[IDs.ZOMBIE_HEAD] = ItemHelper.createItem(Headed.MOD_ID, new HeadedSkullItem(IDs.ZOMBIE_HEAD, "zombie"), "skull.zombie", "zombie_head.png");
         Item.itemsList[IDs.SKELETON_SKULL] = ItemHelper.createItem(Headed.MOD_ID, new HeadedSkullItem(IDs.SKELETON_SKULL, "skeleton"), "skull.skeleton", "skeleton_skull.png");
         Item.itemsList[IDs.CREEPER_HEAD] = ItemHelper.createItem(Headed.MOD_ID, new HeadedSkullItem(IDs.CREEPER_HEAD, "creeper"), "skull.creeper", "creeper_head.png");
-        LOGGER.info("Headed initialized");
+        int randomInt = new Random().nextInt(4);
+        switch (randomInt) {
+            case 0:
+                LOGGER.info("Headed initialized. Get ready to dive HEAD first into the fun!");
+                break;
+            case 1:
+                LOGGER.info("Headed initialized. You must have flipped HEADS to see this message!");
+                break;
+            case 2:
+                LOGGER.info("Headed initialized. The HEADquarters are so happy that you're playing this mod!");
+                break;
+            case 3:
+                LOGGER.info("Headed initialized. I HEAD a joke to tell you, but I forgot it!");
+                break;
+        }
     }
 }

@@ -10,7 +10,6 @@
     "PutSkullOnHeadMixin$ArmorTypeAccessor",
     "RenderSkullOnHeadMixin",
     "RenderSkullOnHeadMixin$ModelAccessor",
-    "RenderSkullOnHeadMixin$RenderManagerAccessor",
     "SkeletonSkullDropMixin",
     "ZombieHeadDropMixin"
   ],

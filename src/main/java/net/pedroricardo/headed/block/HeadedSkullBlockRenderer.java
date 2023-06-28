@@ -40,12 +40,16 @@ public class HeadedSkullBlockRenderer extends TileEntitySpecialRenderer {
             GL11.glTranslatef(0.0F, 0.25F, -0.25F);
         }
 
-        if (blockEntity.getSkullType().equals("skeleton")) {
-            this.bindTextureByName("/mob/skeleton.png");
-        } else if (blockEntity.getSkullType().equals("creeper")) {
-            this.bindTextureByName("/mob/creeper.png");
-        } else {
-            this.bindTextureByName("/mob/zombie.png");
+        switch (blockEntity.getSkullType()) {
+            case "skeleton":
+                this.bindTextureByName("/mob/skeleton.png");
+                break;
+            case "creeper":
+                this.bindTextureByName("/mob/creeper.png");
+                break;
+            default:
+                this.bindTextureByName("/mob/zombie.png");
+                break;
         }
         GL11.glPushMatrix();
         GL11.glScalef(1, -1, -1);
