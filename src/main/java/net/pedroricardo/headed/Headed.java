@@ -18,8 +18,8 @@ public class Headed implements ModInitializer {
     public static final String MOD_ID = "headed";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-    public static final Block SKULL = BlockHelper.createBlock(MOD_ID, new HeadedSkullBlock(902, HeadedSkullBlockEntity.class, true), "skull", "skull.png", Block.soundStoneFootstep, 1.0F, 1.0F, 0.0F).setNotInCreativeMenu();
-    public static final Block WALL_SKULL = BlockHelper.createBlock(MOD_ID, new HeadedSkullBlock(903, HeadedSkullBlockEntity.class, false), "skull.wall", "skull.png", Block.soundStoneFootstep, 1.0F, 1.0F, 0.0F).setNotInCreativeMenu();
+    public static final Block SKULL = BlockHelper.createBlock(MOD_ID, new HeadedSkullBlock(1707, HeadedSkullBlockEntity.class, true), "skull", "skull.png", Block.soundStoneFootstep, 1.0F, 1.0F, 0.0F).setNotInCreativeMenu();
+    public static final Block WALL_SKULL = BlockHelper.createBlock(MOD_ID, new HeadedSkullBlock(SKULL.blockID + 1, HeadedSkullBlockEntity.class, false), "skull.wall", "skull.png", Block.soundStoneFootstep, 1.0F, 1.0F, 0.0F).setNotInCreativeMenu();
 
     public static class IDs {
         public static final int ZOMBIE_HEAD = WALL_SKULL.blockID + 1;
