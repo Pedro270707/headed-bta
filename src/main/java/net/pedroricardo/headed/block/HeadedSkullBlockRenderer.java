@@ -71,9 +71,11 @@ public class HeadedSkullBlockRenderer extends TileEntitySpecialRenderer {
             case "player":
                 RenderManager.instance.renderEngine.loadDownloadableTexture(getPlayerSkinURL(blockEntity.getSkullOwner()), "/mob/char.png", PlayerSkinParser.instance);
                 this.skullModel.skullLayer.showModel = true;
-                if (blockEntity.getSkullOwner().equals("deadmau5")) {
-                    this.skullModel.leftEar.showModel = true;
-                    this.skullModel.rightEar.showModel = true;
+                if (blockEntity.getSkullOwner() != null) {
+                    if (blockEntity.getSkullOwner().equals("deadmau5")) {
+                        this.skullModel.leftEar.showModel = true;
+                        this.skullModel.rightEar.showModel = true;
+                    }
                 }
                 break;
             default:

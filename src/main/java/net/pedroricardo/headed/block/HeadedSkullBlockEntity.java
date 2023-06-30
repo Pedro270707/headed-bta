@@ -7,7 +7,7 @@ import net.pedroricardo.headed.packet.SetHeadTypePacket;
 
 public class HeadedSkullBlockEntity extends TileEntity {
     private String skullType = "zombie";
-    private String skullOwner = "none";
+    private String skullOwner = null;
 
     public HeadedSkullBlockEntity() {
     }
@@ -15,7 +15,9 @@ public class HeadedSkullBlockEntity extends TileEntity {
     public void writeToNBT(NBTTagCompound nbttagcompound) {
         super.writeToNBT(nbttagcompound);
         nbttagcompound.setString("SkullType", this.skullType);
-        nbttagcompound.setString("SkullOwner", this.skullOwner);
+        if (this.skullOwner != null) {
+            nbttagcompound.setString("SkullOwner", this.skullOwner);
+        }
     }
 
     public void readFromNBT(NBTTagCompound nbttagcompound) {
@@ -41,11 +43,7 @@ public class HeadedSkullBlockEntity extends TileEntity {
     }
 
     public void setSkullOwner(String skullOwner) {
-        if (skullOwner != null && skullOwner.equalsIgnoreCase("none")) {
-            this.skullOwner = null;
-        } else {
-            this.skullOwner = skullOwner;
-        }
+        this.skullOwner = skullOwner;
     }
 
     @Override

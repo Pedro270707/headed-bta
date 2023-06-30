@@ -7,10 +7,14 @@ package net.pedroricardo.headed.block;
 
 import net.minecraft.src.*;
 import net.pedroricardo.headed.Headed;
+import net.pedroricardo.pedrolibrary.interfaces.IOnBlockDestroyedByExplosion;
+import net.pedroricardo.pedrolibrary.interfaces.IOnBlockDestroyedByPlayer;
 
 import java.util.Random;
+import java.util.Set;
 
-public class HeadedSkullBlock extends BlockContainer {
+public class HeadedSkullBlock extends BlockContainer implements IOnBlockDestroyedByPlayer,
+        IOnBlockDestroyedByExplosion {
     private final Class<? extends TileEntity> skullEntityClass;
     private final boolean isOnFloor;
 
@@ -81,33 +85,63 @@ public class HeadedSkullBlock extends BlockContainer {
         return 0;
     }
 
-    public void onBlockRemoval(World world, int x, int y, int z) {
-        HeadedSkullBlockEntity blockEntity = (HeadedSkullBlockEntity)world.getBlockTileEntity(x, y, z);
-        String skullType = blockEntity.getSkullType();
-        ItemStack itemStack;
-        switch (skullType) {
-            case "skeleton":
-                itemStack = new ItemStack(Item.itemsList[Headed.IDs.SKELETON_SKULL]);
-                break;
-            case "creeper":
-                itemStack = new ItemStack(Item.itemsList[Headed.IDs.CREEPER_HEAD]);
-                break;
-            case "player":
-                itemStack = new ItemStack(Item.itemsList[Headed.IDs.PLAYER_HEAD]);
-                if (blockEntity.getSkullOwner() != null && !blockEntity.getSkullOwner().isEmpty()) {
-                    itemStack.tag.setBoolean("overrideName", true);
-                    itemStack.tag.setString("name", blockEntity.getSkullOwner());
-                }
-                break;
-            default:
-                itemStack = new ItemStack(Item.itemsList[Headed.IDs.ZOMBIE_HEAD]);
-                break;
-        }
-        world.dropItem(x, y, z, itemStack);
-        super.onBlockRemoval(world, x, y, z);
-    }
-
     public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
         super.onNeighborBlockChange(world, i, j, k, l);
+    }
+
+    @Override
+    public void onBlockDestroyedByPlayer(EntityPlayer entityPlayer, World world, Block block, TileEntity blockEntity, int x, int y, int z, int metadata) {
+        if (entityPlayer.getGamemode().dropBlockOnBreak && blockEntity instanceof HeadedSkullBlockEntity) {
+            HeadedSkullBlockEntity skullBlockEntity = ((HeadedSkullBlockEntity)blockEntity);
+            String skullType = skullBlockEntity.getSkullType();
+            ItemStack itemStack;
+            switch (skullType) {
+                case "skeleton":
+                    itemStack = new ItemStack(Item.itemsList[Headed.IDs.SKELETON_SKULL]);
+                    break;
+                case "creeper":
+                    itemStack = new ItemStack(Item.itemsList[Headed.IDs.CREEPER_HEAD]);
+                    break;
+                case "player":
+                    itemStack = new ItemStack(Item.itemsList[Headed.IDs.PLAYER_HEAD]);
+                    if (skullBlockEntity.getSkullOwner() != null && !skullBlockEntity.getSkullOwner().isEmpty()) {
+                        itemStack.tag.setBoolean("overrideName", true);
+                        itemStack.tag.setString("name", skullBlockEntity.getSkullOwner());
+                    }
+                    break;
+                default:
+                    itemStack = new ItemStack(Item.itemsList[Headed.IDs.ZOMBIE_HEAD]);
+                    break;
+            }
+            world.dropItem(x, y, z, itemStack);
+        }
+    }
+
+    @Override
+    public void onBlockDestroyedByExplosion(Entity exploder, World world, Block block, TileEntity blockEntity, double explosionX, double explosionY, double explosionZ, float explosionSize, Set<ChunkPosition> destroyedBlockPositions, int x, int y, int z) {
+        if (!(exploder instanceof EntityPlayer)) {
+            HeadedSkullBlockEntity skullBlockEntity = (HeadedSkullBlockEntity)blockEntity;
+            String skullType = skullBlockEntity.getSkullType();
+            ItemStack itemStack;
+            switch (skullType) {
+                case "skeleton":
+                    itemStack = new ItemStack(Item.itemsList[Headed.IDs.SKELETON_SKULL]);
+                    break;
+                case "creeper":
+                    itemStack = new ItemStack(Item.itemsList[Headed.IDs.CREEPER_HEAD]);
+                    break;
+                case "player":
+                    itemStack = new ItemStack(Item.itemsList[Headed.IDs.PLAYER_HEAD]);
+                    if (skullBlockEntity.getSkullOwner() != null && !skullBlockEntity.getSkullOwner().isEmpty()) {
+                        itemStack.tag.setBoolean("overrideName", true);
+                        itemStack.tag.setString("name", skullBlockEntity.getSkullOwner());
+                    }
+                    break;
+                default:
+                    itemStack = new ItemStack(Item.itemsList[Headed.IDs.ZOMBIE_HEAD]);
+                    break;
+            }
+            world.dropItem(x, y, z, itemStack);
+        }
     }
 }
