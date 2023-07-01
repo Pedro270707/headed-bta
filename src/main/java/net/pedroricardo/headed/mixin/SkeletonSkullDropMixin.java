@@ -3,7 +3,6 @@ package net.pedroricardo.headed.mixin;
 import net.minecraft.src.*;
 import net.pedroricardo.headed.Headed;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = EntitySkeleton.class, remap = false)
 public abstract class SkeletonSkullDropMixin extends EntityLiving {

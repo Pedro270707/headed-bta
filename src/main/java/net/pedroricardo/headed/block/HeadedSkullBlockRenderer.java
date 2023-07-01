@@ -4,16 +4,13 @@ import b100.json.JsonParser;
 import b100.json.element.JsonArray;
 import b100.json.element.JsonObject;
 import b100.utils.StringUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
-import net.minecraft.src.helper.Textures;
 import net.minecraft.src.utils.GetSkinUrlThread;
 import net.pedroricardo.headed.Headed;
 import net.pedroricardo.headed.block.model.HeadedSkullModel;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
 
-import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 

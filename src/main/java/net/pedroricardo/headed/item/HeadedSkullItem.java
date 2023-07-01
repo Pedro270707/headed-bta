@@ -6,6 +6,7 @@ import net.pedroricardo.headed.Headed;
 import net.pedroricardo.headed.block.HeadedSkullBlockEntity;
 import net.pedroricardo.headed.block.HeadedSkullBlockRenderer;
 import net.pedroricardo.headed.block.model.HeadedSkullModel;
+import net.pedroricardo.pedrolibrary.DownloadableTextureHelper;
 import net.pedroricardo.pedrolibrary.interfaces.IBlockEntityRenderer;
 import org.lwjgl.opengl.GL11;
 
@@ -77,7 +78,8 @@ public class HeadedSkullItem extends Item implements IBlockEntityRenderer {
                 case "creeper":
                     return Minecraft.getMinecraft().renderEngine.getTexture("/mob/creeper.png");
                 case "player":
-                    return Minecraft.getMinecraft().renderEngine.getDownloadableTexture(HeadedSkullBlockRenderer.getPlayerSkinURL(itemStack.tag.getString("name")), "/mob/char.png", PlayerSkinParser.instance);
+                    return new DownloadableTextureHelper().getDownloadableTexture(
+                            HeadedSkullBlockRenderer.getPlayerSkinURL(itemStack.tag.getString("name")), "/mob/char.png", PlayerSkinParser.instance);
                 default:
                     return Minecraft.getMinecraft().renderEngine.getTexture("/mob/zombie.png");
             }
